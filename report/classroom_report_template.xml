@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="classroom_report_details">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.basic_layout">
+                <div class="oe_structure"/>
+                <div class="page">
+                    <div class="row">
+                        <table class="table">
+                            <tr>
+
+                                <td>
+                                    <span>
+                                        <strong>Name</strong>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span>
+                                        <strong>|</strong>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span t-field="o.name"/>
+                                </td>
+                                <td>
+                                    <span>
+                                        <strong>Date of Birth</strong>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span>
+                                        <strong>|</strong>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span t-field="o.date_of_birth"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>
+                                        <strong>Address</strong>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span>
+                                        <strong>|</strong>
+                                    </span>
+                                </td>
+                                <td>
+                                    <p>
+                                        <span t-field="o.street"/>
+                                        <span t-field="o.street2"/>
+                                    </p>
+                                    <p>
+                                        <span t-field="o.city"/>
+                                        <span t-field="o.state_id"/>
+                                        <span t-field="o.zip"/>
+                                    </p>
+                                    <span t-field="o.country_id"/>
+                                </td>
+                                <td>
+                                    <span>
+                                        <strong>Age</strong>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span>
+                                        <strong>|</strong>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span t-field="o.age"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                </div>
+                <t t-if="o.mark_list_ids">
+                    <span>MarkList</span>
+                    <table class="table  " name="marklist">
+                        <thead>
+                            <tr style="background-color: lightgrey;">
+                                <th name="th_exam_name" class="text-left">
+                                    <span>Exam Name</span>
+                                </th>
+                                <th name="th_subject1" class="text-left">
+                                    <span>Subject 1</span>
+                                </th>
+                                <th name="th_subject2" class="text-left">
+                                    <span>Subject 2</span>
+                                </th>
+                                <th name="th_subject3" class="text-left">
+                                    <span>Subject 3</span>
+                                </th>
+                                <th name="th_subject4" class="text-left">
+                                    <span>Subject 4</span>
+                                </th>
+                                <th name="th_total" class="text-left">
+                                    <span>Total</span>
+                                </th>
+                                <th name="th_average" class="text-left">
+                                    <span>Average</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <t t-foreach="o.mark_list_ids" t-as="line">
+                            <tr>
+                                <td>
+                                    <span t-field="line.exam_name"/>
+                                </td>
+                                <td>
+                                    <span t-field="line.subject1"/>
+                                </td>
+                                <td>
+                                    <span t-field="line.subject2"/>
+                                </td>
+                                <td>
+                                    <span t-field="line.subject3"/>
+                                </td>
+                                <td>
+                                    <span t-field="line.subject4"/>
+                                </td>
+                                <td>
+                                    <span t-field="line.total"/>
+                                </td>
+                                <td>
+                                    <span t-field="line.average"/>
+                                </td>
+                            </tr>
+
+                        </t>
+
+                    </table>
+
+
+                </t>
+                <div style="text-align:right">
+                    <strong>Total Marks :
+                        <span t-field="o.total_marks"/>
+                    </strong>
+                </div>
+            </t>
+        </t>
+
+
+    </template>
+</odoo>

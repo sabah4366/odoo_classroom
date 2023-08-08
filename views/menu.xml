@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <menuitem id="menu_classroom_root"
+              name="ClassRoom"
+              web_icon="classroom,static/description/scl.png"
+              sequence="0"/>
+
+    <menuitem id="menu_classroom_master"
+              name="ClassRoom Details"
+              parent="menu_classroom_root"
+              sequence="0"/>
+</odoo>

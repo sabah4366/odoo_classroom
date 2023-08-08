@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_classroom_students_tree" model="ir.ui.view">
+        <field name="name">classroom.students.tree</field>
+        <field name="model">classroom.students</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" string="Name"/>
+                <field name="age"/>
+                <field name="country_id"/>
+                <field name="total_marks"/>
+
+            </tree>
+        </field>
+    </record>
+    <record id="view_classroom_students_form" model="ir.ui.view">
+        <field name="name">classroom.students.form</field>
+        <field name="model">classroom.students</field>
+        <field name="arch" type="xml">
+            <form>
+                 <header>
+                        <button class="oe_highlight" name="action_pdf_report" type="object" string="Print Pdf Report"/>
+                        <button class="oe_highlight" name="action_xlsx_report" type="object" string="Print Excel Report"/>
+                 </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="date_of_birth"/>
+                            <field name="age" readonly="1" force_save="1"/>
+                        </group>
+                        <group>
+                            <label for="street" string="Address"/>
+                            <div>
+                                <field name="street" placeholder="Street..."/>
+                                <field name="street2" placeholder="Street 2..."/>
+                                <group>
+                                    <div class="address_format">
+                                        <field name="city" placeholder="City" style="width: 33%" nolabel="1"/>
+                                        <field name="state_id" placeholder="State" style="width: 33%" nolabel="1"
+                                               domain="[('country_id','=?',country_id)]"/>
+                                        <field name="zip" placeholder="ZIP" style="width: 34%" nolabel="1"/>
+                                    </div>
+                                </group>
+                                <field name="country_id" placeholder="Country"/>
+                            </div>
+                        </group>
+
+                    </group>
+                    <notebook>
+                        <page string="MarkList" name="mark_list">
+                            <field name="mark_list_ids">
+                                <tree editable="bottom">
+                                    <field name="exam_name"/>
+                                    <field name="subject1" string="Subject 1"/>
+                                    <field name="subject2" string="Subject 2"/>
+                                    <field name="subject3" string="Subject 3"/>
+                                    <field name="subject4" string="Subject 4"/>
+                                    <field name="total" string="Total" readonly="1"/>
+                                    <field name="average" string="Average" readonly="1"/>
+                                </tree>
+
+                                <form editable="bottom">
+                                    <field name="exam_name"/>
+                                    <field name="subject1" string="Subject 1"/>
+                                    <field name="subject2" string="Subject 2"/>
+                                    <field name="subject3" string="Subject 3"/>
+                                    <field name="subject4" string="Subject 4"/>
+                                    <field name="total" readonly="1" string="Total"/>
+                                    <field name="average" readonly="1" string="Average"/>
+                                </form>
+                            </field>
+
+                            <div style="text-align:right">
+                                <label string="Total Marks : " for="total_marks"/>
+                                <field  name="total_marks" style="font-weight: bold;" />
+                            </div>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_classroom_students_search" model="ir.ui.view">
+        <field name="name">classroom.students.search</field>
+        <field name="model">classroom.students</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter name="filter_age" string="Adult" domain="[('age','>=',18)]"/>
+                <group expand="0" string="Group By" >
+                    <filter string="Based on Age" name="group_by_age" context="{'group_by':'age'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+
+    <record id="action_classroom_students" model="ir.actions.act_window">
+        <field name="name">ClassRooms</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">classroom.students</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create Your First ClassRoom!!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_classroom"
+              name="Classrooms"
+              parent="menu_classroom_master"
+              action="action_classroom_students"
+              sequence="0"/>
+
+
+</odoo>

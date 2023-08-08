@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="module_category_hospital" model="ir.module.category">
+        <field name="name">ClassRoom Management</field>
+        <field name="description">Category Classroom</field>
+        <field name="sequence">0</field>
+    </record>
+
+    <record id="group_hospital_teacher" model="res.groups">
+        <field name="name">Teacher</field>
+        <field name="category_id" ref="module_category_hospital"/>
+    </record>
+
+    <record id="group_hospital_principal" model="res.groups">
+        <field name="name">Principal</field>
+        <field name="category_id" ref="module_category_hospital"/>
+        <field name="implied_ids" eval="[(4,ref('group_hospital_teacher'))]"/>
+    </record>
+</odoo>
